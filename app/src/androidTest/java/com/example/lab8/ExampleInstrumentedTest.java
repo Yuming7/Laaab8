@@ -46,12 +46,36 @@ public class ExampleInstrumentedTest {
         list.addCity(new City("Estevan", "SK"));
         assertEquals(list.getCount(),listSize + 1);
     }
-    /**
-     * this adds a city object to the list
-     *the second phase, you can add the
-     city * @param city
-     */
-    public void addCity(City city){
-        cities.add(city);
+
+    @Before
+    public void setUp() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        ArrayList<City> cityDataList = new ArrayList<>();
+        cityDataList.add(new City("Edmonton", "AB"));
+        cityDataList.add(new City("Vancouver", "BC"));
+        cityDataList.add(new City("Toronto", "ON"));
+        list = new CustomList(appContext, cityDataList);
     }
+
+    @Test
+    public void testHasCity() {
+        City existingCity = new City("Edmonton", "AB");
+        City nonExistingCity = new City("Calgary", "AB");
+
+        assertTrue(list.hasCity(existingCity));
+        assertFalse(list.hasCity(nonExistingCity));
+    }
+
+    @Test
+    public void testDeleteCity() {
+        City cityToDelete = new City("Vancouver", "BC");
+        list.delete(cityToDelete);
+        assertFalse(list.hasCity(cityToDelete));
+    }
+
+    @Test
+    public void testCountCities() {
+        assertEquals(3, list.countCities());
+    }
+
 }
