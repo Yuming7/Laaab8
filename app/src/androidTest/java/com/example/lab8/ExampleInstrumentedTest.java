@@ -5,8 +5,11 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -58,12 +61,21 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testHasCity() {
-        City existingCity = new City("Edmonton", "AB");
+    public void testHasCity_Failure() {
+        // Creating a city that doesn't exist in the list
         City nonExistingCity = new City("Calgary", "AB");
 
-        assertTrue(list.hasCity(existingCity));
+        // Asserting that the non-existing city should not be present in the list
         assertFalse(list.hasCity(nonExistingCity));
+    }
+
+    @Test
+    public void testHasCity_Success() {
+        // Creating a city that does exist in the list
+        City existingCity = new City("Edmonton", "AB");
+
+        // Asserting that the existing city should be present in the list
+        assertTrue(list.hasCity(existingCity));
     }
 
     @Test
