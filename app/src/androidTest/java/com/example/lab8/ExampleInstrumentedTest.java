@@ -46,4 +46,12 @@ public class ExampleInstrumentedTest {
         list.addCity(new City("Estevan", "SK"));
         assertEquals(list.getCount(),listSize + 1);
     }
+    /**
+     * this adds a city object to the list
+     *the second phase, you can add the
+     city * @param city
+     */
+    public void addCity(City city){
+        cities.add(city);
+    }
 }
